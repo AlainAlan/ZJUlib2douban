@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         ZJUlib2douban
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  在ZJU图书馆书目详情页面右上角添加一个前往豆瓣该书页面的链接，仅限具有ISBN的书目。
+// @namespace    https://github.com/AlainAlan/ZJUlib2douban/tree/main
+// @version      0.2
+// @description  在ZJU图书馆书目详情页面右上角添加一个前往豆瓣该书页面的链接，仅限具有ISBN的书目。刚刚适配了早期没有978开头的ISBN。
 // @author       AlainAllen
 // @match        *://opac.zju.edu.cn/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=csdn.net
@@ -14,7 +14,7 @@
     // Function to extract the last ISBN using regular expression
     function extractLastISBN() {
         // Regular expression for matching ISBN-10 and ISBN-13
-        var isbnRegex = /ISBN(?:-1[03])?:?\s*(\d{3}-?\d{1,5}-?\d{1,7}-?\d{1,7}-?[\dX])/g;
+        var isbnRegex = /ISBN(?:-1[03])?:?\s*(\d{0,3}-?\d{1,5}-?\d{1,7}-?\d{1,7}-?[\dX])/g;
         var bodyText = document.body.innerText;
         var isbnMatches = [...bodyText.matchAll(isbnRegex)];
         if (isbnMatches.length > 0) {
